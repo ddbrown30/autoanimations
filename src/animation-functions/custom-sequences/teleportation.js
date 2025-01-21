@@ -88,26 +88,24 @@ export async function teleportation(handler, animationData) {
             });
         }
     }
-        
 
-    canvas.app.stage.addListener('pointerdown', event => {
+
+    let pointerdownListener = (event) => {
         if (event.data.button !== 0) { return }
         pos = event.data.getLocalPosition(canvas.app.stage);
-
         let topLeft = canvas.grid.getTopLeft(pos.x, pos.y);
-
         if (canvas.grid.measureDistance(sourceToken, { x: topLeft[0], y: topLeft[1] }, { gridSpaces: true }) <= data.options.range) {
-            //console.log(canvas.grid.measureDistance(sourceToken, { x: topLeft[0], y: topLeft[1] }, {gridSpaces: true}))
             if (data.options.checkCollision && testCollision(pos)) {
                 ui.notifications.error("Your Path is Blocked!! Try Again")
             } else {
                 deleteTemplatesAndMove();
-                canvas.app.stage.removeListener('pointerdown');    
+                canvas.app.stage.removeListener("pointerdown", pointerdownListener)
             }
         } else {
             ui.notifications.error(game.i18n.format("autoanimations.settings.teleport"))
         }
-    });
+    };
+    canvas.app.stage.addListener("pointerdown", pointerdownListener);
 
     function testCollision(pos) {
         let pointerCenter = {
