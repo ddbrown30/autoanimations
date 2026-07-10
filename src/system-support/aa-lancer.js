@@ -8,7 +8,7 @@ import { trafficCop } from "../router/traffic-cop";
 export function systemHooks() {
 	// The Lancer system does not expose any hooks for rolling items, so have to rely on reading the chat messages.
 	Hooks.on("createChatMessage", async (msg) => {
-		if (msg.user.id !== game.user.id) return;
+		if (msg.author?.id !== game.user.id) return;
 
 		const itemData = getHandlerInputData(msg);
 		if (!itemData) {

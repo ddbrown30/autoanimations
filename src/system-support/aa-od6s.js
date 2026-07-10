@@ -9,7 +9,7 @@ import { getRequiredData }  from "./getRequiredData.js";
 
 export function systemHooks() {
     Hooks.on("createChatMessage", async (msg) => {
-        if (msg.user.id !== game.user.id || !AnimationState.enabled) { return }
+        if (msg.author?.id !== game.user.id || !AnimationState.enabled) { return }
         if (msg.getFlag('od6s', 'type') === 'damage') { return }
         if (msg.getFlag('od6s', 'isExplosive')) {
             if(!msg.getFlag('od6s','triggered')) { return }

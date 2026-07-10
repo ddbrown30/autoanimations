@@ -16,7 +16,7 @@ export function systemHooks() {
 }
 
 async function checkChatMessageAnarchy(msg, anarchyData) {
-    if (msg.user.id !== game.user.id || !AnimationState.enabled) { 
+    if (msg.author?.id !== game.user.id || !AnimationState.enabled) { 
         return;
     }
 

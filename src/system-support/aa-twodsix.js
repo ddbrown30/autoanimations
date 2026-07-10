@@ -4,7 +4,7 @@ import { getRequiredData }  from "./getRequiredData.js";
 
 export function systemHooks() {
     Hooks.on("createChatMessage", async (msg) => {
-        if (msg.user.id !== game.user.id) { return };
+        if (msg.author?.id !== game.user.id) { return };
         const flags = msg.flags?.twodsix ?? {};
         const itemUuid = flags.itemUUID;
         const tokenUuid = flags.tokenUUID;

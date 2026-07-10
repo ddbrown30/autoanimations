@@ -7,7 +7,7 @@ export function systemHooks() {
   const queue = [];
 
   Hooks.on("createChatMessage", async (msg) => {
-    if (msg.user.id !== game.user.id) { return };
+    if (msg.author?.id !== game.user.id) { return };
 
     const item = await fromUuid(msg.flags?.a5e?.itemId);
 

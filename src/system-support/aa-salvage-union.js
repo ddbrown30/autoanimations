@@ -7,7 +7,7 @@ export function systemHooks() {
 }
 
 async function checkMessage(msg) {
-    if (msg.user.id !== game.user.id) { 
+    if (msg.author?.id !== game.user.id) { 
         return 
     };
 

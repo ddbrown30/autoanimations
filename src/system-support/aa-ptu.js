@@ -5,7 +5,7 @@ import {getRequiredData }   from "./getRequiredData.js";
 
 export function systemHooks() {
     Hooks.on("createChatMessage", async (msg) => {
-        if (msg.user.id !== game.user.id) { return };
+        if (msg.author?.id !== game.user.id) { return };
         const playOnDmg = game.settings.get("autoanimations", "playonDamageCore")
         let compiledData = await getRequiredData({
             item: await fromUuid(msg.flags.ptu?.origin?.uuid),
