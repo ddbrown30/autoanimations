@@ -18,6 +18,7 @@ export async function createActiveEffects(effect) {
 
     // Gets the Token that the Active Effect is applied to (which can also be from an actor's embedded item)
     const actor = effect.parent instanceof Item ? effect.parent.actor : effect.parent;
+    if (!actor) { return; }
     const aeToken = actor.token ?? actor.getActiveTokens()[0];
     if (!aeToken) {
         debug("Failed to find the Token for the Active Effect")
@@ -53,6 +54,7 @@ export async function deleteActiveEffects(effect, shouldDelete = false) {
     //let aaEffects = Sequencer.EffectManager.getEffects({ origin: effect.uuid })
 
     const actor = effect.parent instanceof Item ? effect.parent.actor : effect.parent;
+    if (!actor) { return; }
     const token = actor.token ?? actor.getActiveTokens()[0];
 
     const data = {
