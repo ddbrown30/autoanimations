@@ -147,7 +147,9 @@ export async function melee(handler, animationData) {
             if (data.options.elevation === 0) {
                 rangeSeq.belowTokens(true)
             } else {
-                rangeSeq.elevation(handler.elevation(sourceToken, data.options.isAbsolute, data.options.elevation), { absolute: data.options.isAbsolute })
+                const sourceLevel = (sourceToken?.document ?? sourceToken)?.level ?? canvas.level;
+                const targetLevel = (currentTarget?.token?.document ?? currentTarget?.token)?.level ?? canvas.level;
+                rangeSeq.onLevels([sourceLevel, targetLevel]);
             }
             rangeSeq.playbackRate(data.options.playbackRate)
             if (data.options.tint) {
