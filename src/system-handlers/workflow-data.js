@@ -20,6 +20,9 @@ export default class AAHandler {
         // Hook to signify the start of the A-A workflow;
         Hooks.callAll("AutomatedAnimations-WorkflowStart", clonedData, animationData);
 
+        // Let listeners veto asynchronously.
+        if (clonedData.deferrals?.length) await Promise.allSettled(clonedData.deferrals);
+
         // Can be added from the above Hook to stop the A-A workflow
         if (clonedData.stopWorkflow) {
             debug(`Animation Workflow was interrupted by an External Source`, clonedData )
