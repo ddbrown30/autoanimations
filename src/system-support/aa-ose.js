@@ -6,7 +6,7 @@ export function systemHooks() {
     Hooks.on("createChatMessage", async (msg) => {
         if (msg.author?.id !== game.user.id) { return };
 
-        let itemId = msg.flags?.ose?.itemId;
+        let itemId = msg.flags?.ose?.itemId ?? msg.rolls?.[0]?.options?.itemId;
         if (!itemId) {
             const match = msg.content?.match(/data-item-id="([^"]+)"/);
             itemId = match ? match[1] : null;
